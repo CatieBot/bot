@@ -1,7 +1,5 @@
 // DEVELOPED BY DANEESKRIPTER
 const Discord = require("discord.js")
-const ms = require('ms')
-const guild = require('discord.js')
 
 module.exports = {
     name: 'ban',
@@ -30,7 +28,7 @@ module.exports = {
                     } else {
                     const embed4 = new Discord.MessageEmbed()
                     embed4.setColor('#C92D1C')
-                    embed4.setDescription('<:CatieError:839151745665204234> You need type reason.')
+                    embed4.setDescription('<:CatieError:839151745665204234> You need define reason.')
                     message.channel.send(embed4)
                     }
                 } else {

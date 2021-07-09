@@ -11,7 +11,7 @@ module.exports = {
         if (!question) {
             const noargs = new Discord.MessageEmbed
             noargs.setColor('#C92D1C')
-            noargs.setDescription('<:CatieError:839151745665204234> You need type some question')
+            noargs.setDescription('<:CatieError:839151745665204234> You need define some question')
             message.channel.send(noargs)
         } else if (question.includes('pancake')) {
             const questionmsg2 = new Discord.MessageEmbed

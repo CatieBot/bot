@@ -45,7 +45,7 @@ module.exports = {
               }
           })
 
-          message.channel.send(`Your problem type here ${channel}`).then((msg) => {
+          message.channel.send(`Your problem define here ${channel}`).then((msg) => {
               setTimeout(() => msg.delete(), 10000)
               setTimeout(() => message.delete(), 3000)
           }).catch((err) => {

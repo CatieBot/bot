@@ -41,7 +41,7 @@ module.exports = {
             } else {
                 const invalidargs = new Discord.MessageEmbed
                 invalidargs.setColor('#c92d1c')
-                invalidargs.setDescription('<:CatieError:839151745665204234> You need type on or off')
+                invalidargs.setDescription('<:CatieError:839151745665204234> You need define on or off')
                 message.channel.send(invalidargs)
             }
         }

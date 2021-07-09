@@ -19,13 +19,13 @@ module.exports = {
             if (Number.isNaN(+time)) {
             const nonumber = new Discord.MessageEmbed
             nonumber.setColor('#C92D1C')
-            nonumber.setDescription('<:CatieError:839151745665204234> You need type number.')
+            nonumber.setDescription('<:CatieError:839151745665204234> You need define number.')
             message.channel.send(nonumber)
                  } else {
                      if (time > 21600) {
                         const notvalid = new Discord.MessageEmbed
                         notvalid.setColor('#C92D1C')
-                        notvalid.setDescription('<:CatieError:839151745665204234> You need type number which is less than 21600')
+                        notvalid.setDescription('<:CatieError:839151745665204234> You need define number which is less than 21600')
                         message.channel.send(notvalid)
                      } else {
                         message.channel.setRateLimitPerUser(`${time}`)
@@ -38,7 +38,7 @@ module.exports = {
                 } else {
                     const noargs = new Discord.MessageEmbed
                     noargs.setColor('#C92D1C')
-                    noargs.setDescription('<:CatieError:839151745665204234> You need type slow mode time in seconds.')
+                    noargs.setDescription('<:CatieError:839151745665204234> You need define slow mode time in seconds.')
                     message.channel.send(noargs)
                 }
             } else {

@@ -18,7 +18,7 @@ module.exports = {
 		if (!song) {
 			const noargs = new Discord.MessageEmbed
 			noargs.setColor('#C92D1C')
-			noargs.setDescription('<:CatieError:839051550835212298> You need type URL or name of song.')
+			noargs.setDescription('<:CatieError:839051550835212298> You need define URL or name of song.')
 			message.channel.send(noargs)
 		} else {
 			client.distube.play(message, song)

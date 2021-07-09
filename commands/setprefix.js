@@ -19,7 +19,7 @@ module.exports = {
             if (!prefix) {
                 const noargs = new Discord.MessageEmbed
                 noargs.setColor('#c92d1c')
-                noargs.setDescription('<:CatieError:839151745665204234> You need type prefix')
+                noargs.setDescription('<:CatieError:839151745665204234> You need define prefix')
                 message.channel.send(noargs)
             } else {
                 const response = await serverSettings.findOneAndUpdate({

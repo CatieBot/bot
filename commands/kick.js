@@ -29,7 +29,7 @@ module.exports = {
                     } else {
                     const embed4 = new Discord.MessageEmbed()
                     embed4.setColor('#c92d1c')
-                    embed4.setDescription('<:CatieError:839151745665204234> You need type reason.')
+                    embed4.setDescription('<:CatieError:839151745665204234> You need define reason.')
                     message.channel.send(embed4)
                     }
                 } else {

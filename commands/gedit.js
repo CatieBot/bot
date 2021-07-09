@@ -20,27 +20,27 @@ module.exports = {
         } else if (Number.isNaN(+messageID)) {
             const notnumber = new Discord.MessageEmbed
             notnumber.setColor('#c92d1c')
-            notnumber.setDescription('<:CatieError:839151745665204234> You need type Message ID')
+            notnumber.setDescription('<:CatieError:839151745665204234> You need define Message ID')
             message.channel.send(notnumber)
         } else if (!messageID) {
             const noargs = new Discord.MessageEmbed
             noargs.setColor('#c92d1c')
-            noargs.setDescription('<:CatieError:839151745665204234> You need type Message ID')
+            noargs.setDescription('<:CatieError:839151745665204234> You need define Message ID')
             message.channel.send(noargs)
         } else if (!time) {
             const noargs2 = new Discord.MessageEmbed
             noargs2.setColor('#c92d1c')
-            noargs2.setDescription('<:CatieError:839151745665204234> You need type the time you want to add/-remove')
+            noargs2.setDescription('<:CatieError:839151745665204234> You need define the time you want to add/-remove')
             message.channel.send(noargs2)
         } else if (!winners) {
             const noargs3 = new Discord.MessageEmbed
             noargs3.setColor('#c92d1c')
-            noargs3.setDescription('<:CatieError:839151745665204234>> You need type new quantity of winners')
+            noargs3.setDescription('<:CatieError:839151745665204234>> You need define new quantity of winners')
             message.channel.send(noargs3)
         } else if (!prize) {
             const noargs4 = new Discord.MessageEmbed
             noargs4.setColor('#c92d1c')
-            noargs4.setDescription('<:CatieError:839151745665204234> You need type new prize')
+            noargs4.setDescription('<:CatieError:839151745665204234> You need define new prize')
             message.channel.send(noargs4)
         } else {
             client.giveawaysManager.edit(messageID, {

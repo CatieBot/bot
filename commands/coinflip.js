@@ -13,7 +13,7 @@ module.exports = {
         if (!amount) {
             const noargs = new Discord.MessageEmbed
             noargs.setColor('#c92d1c')
-            noargs.setDescription('<:CatieError:839151745665204234> You need type how much you want to bet')
+            noargs.setDescription('<:CatieError:839151745665204234> You need define how much you want to bet')
             message.channel.send(noargs)
         } else {
             if (amount > economyData.coins) {

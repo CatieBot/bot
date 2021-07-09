@@ -37,7 +37,7 @@ module.exports = {
 		} else {
 			const loop = new Discord.MessageEmbed
 			loop.setColor('#C92D1C')
-			loop.setDescription('<:CatieError:839151745665204234> You choose type **song/queue/disable**')
+			loop.setDescription('<:CatieError:839151745665204234> You choose define **song/queue/disable**')
 			message.channel.send(loop)
 		}
 

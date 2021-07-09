@@ -21,17 +21,17 @@ module.exports = {
         if (!time) {
             const notime = new Discord.MessageEmbed
             notime.setColor('#c92d1c')
-            notime.setDescription('<:CatieError:839151745665204234> You need type time of giveaway')
+            notime.setDescription('<:CatieError:839151745665204234> You need define time of giveaway')
             message.channel.send(notime)
         } else if (!winners) {
             const nowinners = new Discord.MessageEmbed
             nowinners.setColor('#c92d1c')
-            nowinners.setDescription('<:CatieError:839151745665204234> You need type quantity of winners')
+            nowinners.setDescription('<:CatieError:839151745665204234> You need define quantity of winners')
             message.channel.send(nowinners)
         } else if (!prize) {
             const noprize = new Discord.MessageEmbed
             noprize.setColor('#c92d1c')
-            noprize.setDescription('<:CatieError:839151745665204234> You need type prize')
+            noprize.setDescription('<:CatieError:839151745665204234> You need define prize')
             message.channel.send(noprize)
         } else {
             client.giveawaysManager.start(message.channel, {

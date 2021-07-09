@@ -36,14 +36,14 @@ module.exports = {
             const levels = new Discord.MessageEmbed
             levels.setTitle('✨ Levels')
             levels.setColor('RANDOM')
-            levels.setDescription(`**${prefix}rank** - Show your level.\n**${prefix}resetxp** - Reset all xp and levels`)
+            levels.setDescription(`**${prefix}rank** - Show your level.\n**${prefix}resetxp** - Reset all xp and levels\n**${prefix}addxp** - Add xp to user\n**${prefix}setreward** - Set role reward for specific level\n**${prefix}delreward** - Delete role reward for specific level\n**${prefix}rewardlist** - Show all role rewards`)
             message.channel.send(levels)
         }
         if (type === 'music') {
             const music = new Discord.MessageEmbed
             music.setTitle('🎶 Music')
             music.setColor('RANDOM')
-            music.setDescription(`**${prefix}play** - Play a song\n**${prefix}stop** - Stop the music\n**${prefix}queue** - Show queue\n**${prefix}skip** - Skip the song\n**${prefix}loop** - Loop song/queue\n**${prefix}volume** - Set volume\n**${prefix}pause** - Pause the song\n**${prefix}resume** - Resume the song`)
+            music.setDescription(`**${prefix}play** - Play a song\n**${prefix}stop** - Stop the music\n**${prefix}queue** - Show queue\n**${prefix}skip** - Skip the song\n**${prefix}loop** - Loop song/queue\n**${prefix}volume** - Set volume\n**${prefix}pause** - Pause the song\n**${prefix}resume** - Resume the song\n**${prefix}radio** - Play a radio!`)
             message.channel.send(music)
         }
         if (type === 'economy') {
@@ -71,7 +71,7 @@ module.exports = {
             const utility = new Discord.MessageEmbed
             utility.setTitle('🔨 Utility')
             utility.setColor('RANDOM')
-            utility.setDescription(`**${prefix}levels** - Turn on or turn off level system\n**${prefix}setprefix** - Set custom prefix`)
+            utility.setDescription(`**${prefix}levels** - Turn on or turn off level system\n**${prefix}setprefix** - Set custom prefix\n**${prefix}invite** - Send invite link and other links`)
             message.channel.send(utility)
         }
 	},

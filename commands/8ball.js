@@ -11,7 +11,7 @@ module.exports = {
         if (!question) {
             const noquestion = new Discord.MessageEmbed
             noquestion.setColor('#C92D1C')
-            noquestion.setDescription('<:CatieError:839151745665204234> You need type question.')
+            noquestion.setDescription('<:CatieError:839151745665204234> You need define question.')
             message.channel.send(noquestion)
         } else {
         const replies = [`Yes`, "No", "Hmmm... Yes!", "Hmmm... No!", "I don't know.", "Maybe", "Never"]

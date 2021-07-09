@@ -10,12 +10,12 @@ module.exports = {
         if (Number.isNaN(+messageID)) {
             const notnumber = new Discord.MessageEmbed
             notnumber.setColor('#c92d1c')
-            notnumber.setDescription('<:CatieError:839151745665204234> You need type Message ID')
+            notnumber.setDescription('<:CatieError:839151745665204234> You need define Message ID')
             message.channel.send(notnumber)
         } else if (!messageID) {
             const noargs = new Discord.MessageEmbed
             noargs.setColor('#c92d1c')
-            noargs.setDescription('<:CatieError:839151745665204234> You need type Message ID')
+            noargs.setDescription('<:CatieError:839151745665204234> You need define Message ID')
             message.channel.send(noargs)
         } else {
             client.giveawaysManager.delete(messageID).then(() => {

@@ -19,7 +19,7 @@ module.exports = {
                     if (number) {
                         if (Number.isNaN(+number)) {
                             const notnumber = new Discord.MessageEmbed()
-                            notnumber.setDescription('<:CatieError:839151745665204234> You need type number.')
+                            notnumber.setDescription('<:CatieError:839151745665204234> You need define number.')
                             notnumber.setColor('#c92d1c')
     
                             message.channel.send(notnumber)
@@ -38,7 +38,7 @@ module.exports = {
                     } else {
                         const noargs = new Discord.MessageEmbed()
                         noargs.setColor('#c92d1c')
-                        noargs.setDescription('<:CatieError:839151745665204234> You need type how many messages to delete.')
+                        noargs.setDescription('<:CatieError:839151745665204234> You need define how many messages to delete.')
     
                         message.channel.send(noargs)
                     }
