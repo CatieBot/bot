@@ -1,12 +1,15 @@
 const Discord = require('discord.js')
 const randomPuppy = require('random-puppy')
+const { Command, ArgumentType } = require('gcommands')
 
-module.exports = {
-	name: 'meme',
-	description: 'Show meme from subreddit',
-	async execute(message, args) {
-        const author = message.author.tag
-        console.log(`${author} send command meme.`)
+module.exports = class Meme extends Command {
+    constructor(...args) {
+        super(...args, {
+            name: 'meme',
+            description: 'Show random meme from reddit',
+        })
+    }
+    async run({client, respond, edit}, args) {
         const subreddits = ["meme", "memes", "dankmeme"]
         const random = subreddits[Math.floor(Math.random() * subreddits.length)]
 
@@ -15,6 +18,7 @@ module.exports = {
         meme.setTitle(`Meme from r/${random}`)
         meme.setColor('RANDOM')
         meme.setImage(img)
-        message.channel.send(meme)
-	},
-};
+        respond({embeds: [meme]})
+    }
+}
+

@@ -2,70 +2,83 @@ const Discord = require('discord.js')
 const Levels = require('discord-xp')
 const canvacord = require('canvacord')
 const serverSettings = require('../models/serverSettings')
-
+const { Command, ArgumentType } = require('gcommands')
 Levels.setURL("mongodb+srv://daneeskripter:danee08@cluster0.2vmc2.mongodb.net/Data")
 
-module.exports = {
-	name: 'rank',
-	description: 'Show user rank.',
-	async execute(message, args) {
-        const author = message.author.tag
-        console.log(`${author} send command rank.`)
-        const serverData = await serverSettings.findOne({serverID: message.guild.id})
+
+module.exports = class Rank extends Command {
+    constructor(...args) {
+        super(...args, {
+            name: 'rank',
+            description: 'Show your level and rank',
+            args: [
+                {
+                    name: "user",
+                    type: ArgumentType.USER,
+                    description: "Show user level and rank",
+                    required: false
+                }
+            ]
+        })
+    }
+    async run({client, respond, edit, member, guild}, args) {
+        const serverData = await serverSettings.findOne({serverID: guild.id})
         if (serverData.levels === 'off') {
             const disabled = new Discord.MessageEmbed
             disabled.setColor('#C92D1C')
-            disabled.setDescription('<:CatieError:839151745665204234>Level system is disabled')
-            message.channel.send(disabled)
+            disabled.setDescription('<:CatieError:839151745665204234> Level system is disabled')
+            respond({embeds: [disabled]})
         } else if (serverData.levels === 'on') {
-            const target = message.mentions.users.first()
-        if (!target) {
-        const author = message.author
-        const user = await Levels.fetch(author.id, message.guild.id, true);
+        const targetuser = args[0]
+        const target = guild.members.cache.get(targetuser)
+        if (!targetuser) {
+        const author = member
+        const user = await Levels.fetch(author.id, guild.id, true);
         if(user.level === '0') {
-            message.channel.send('<:CatieError:839051550835212298> You dont have any level.')
+            respond('<:CatieError:839051550835212298> You dont have any level.')
         } else {
             const neededXp = Levels.xpFor(parseInt(user.level) + 1)
             const rank = new canvacord.Rank()
-            .setAvatar(author.displayAvatarURL({dynamic: false, format: 'png'} ))
+            .setAvatar(author.user.displayAvatarURL({dynamic: false, format: 'png'} ))
             .setCurrentXP(user.xp)
             .setLevel(user.level)
             .setRank(user.position)
             .setRequiredXP(neededXp)
             .setStatus(author.presence.status)
             .setProgressBar('#ffffff', "COLOR")
-            .setUsername(author.username)
-            .setDiscriminator(author.discriminator)
+            .setUsername(author.user.username)
+            .setDiscriminator(author.user.discriminator)
             rank.build()
             .then(data => {
                 const attachment = new Discord.MessageAttachment(data, 'rank.png')
-                message.channel.send(attachment)
+                respond(attachment)
             })
         }
         
         } else {
-        const user2 = await Levels.fetch(target, message.guild.id, true);
+        const user2 = await Levels.fetch(target.id, guild.id, true);
         if(user2.level === '0') {
-            message.channel.send(`<:CatieError:839051550835212298> ${target} dont have any level.`)
+            respond(`<:CatieError:839051550835212298> ${target} dont have any level.`)
         } else {
-            const neededXp = Levels.xpFor(parseInt(user2.level) + 1)
+        const neededXp = Levels.xpFor(parseInt(user2.level) + 1)
         const rank2 = new canvacord.Rank()
-        .setAvatar(target.displayAvatarURL({dynamic: false, format: 'png'} ))
+        .setAvatar(target.user.displayAvatarURL({dynamic: false, format: 'png'} ))
         .setCurrentXP(user2.xp)
         .setLevel(user2.level)
         .setRank(user2.position)
         .setRequiredXP(neededXp)
         .setStatus(target.presence.status)
         .setProgressBar('#ffffff', "COLOR")
-        .setUsername(target.username)
-        .setDiscriminator(target.discriminator)
+        .setUsername(target.user.username)
+        .setDiscriminator(target.user.discriminator)
         rank2.build()
         .then(data => {
             const attachment2 = new Discord.MessageAttachment(data, 'rank.png')
-            message.channel.send(attachment2)
+            respond(attachment2)
         })
         }
     }
         }
-	},
-};
+    }
+}
+

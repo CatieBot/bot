@@ -1,13 +1,25 @@
 const Discord = require('discord.js')
 const economyProfile = require('../models/economyProfile')
+const { Command, ArgumentType } = require('gcommands')
 
-module.exports = {
-	name: 'withdraw',
-	description: 'Withdraw coins from bank into your wallet',
-	async execute(message, args) {
-        const author = message.author.tag
-        console.log(`${author} send command withdraw.`)
-        const user = message.author
+module.exports = class Withdraw extends Command {
+    constructor(...args) {
+        super(...args, {
+            name: 'withdraw',
+            description: 'Withdraw coins from bank into your wallet',
+            args: [
+                {
+                    name: "amount",
+                    type: ArgumentType.INTEGER,
+                    description: "Amount of coins to withdraw from bank",
+                    prompt: "",
+                    required: true
+                }
+            ]
+        })
+    }
+    async run({client, respond, edit}, args) {
+        const user = member
         const economyData = await economyProfile.findOne({ userID: user.id})
         const amount = args[0]
         if (amount % 1 != 0 || amount <= 0) {
@@ -24,7 +36,7 @@ module.exports = {
                 message.channel.send(nofunds)
             } else {
                 await economyProfile.findOneAndUpdate({
-                    userID: message.author.id
+                    userID: user.id
                 }, {
                     $inc: {
                         coins: amount,
@@ -39,5 +51,6 @@ module.exports = {
         }catch(err){
             console.log(err)
         }
-	},
-};
+    }
+}
+

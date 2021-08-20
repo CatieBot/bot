@@ -1,37 +1,39 @@
-const Discord = require('discord.js')
-const client = new Discord.Client()
+const { GCommandsClient, GCommands, Color } = require("gcommands")
 const config = require('./config.json')
 const DisTube = require('distube')
 const mongoose = require('mongoose')
 
-// MUSIC
+// GCOMMANDS
+const client = new GCommandsClient({
+    cmdDir: "commands/",
+    eventDir: "events/",
+    language: "english", //english, spanish, portuguese, russian, german, czech, turkish
+    ownLanguageFile: require("./message.json"),
+    unkownCommandMessage: false,
+    commands: {
+        slash: "both", //true = slash only, false = only normal, both = slash and normal
+        context: "false", // https://gcommands.js.org/docs/#/docs/main/dev/typedef/GCommandsOptionsCommandsContext
+        prefix: "c!", // for normal commands
+      },
+    database: "mongodb://daneeskripter:danee08@cluster0-shard-00-00.2vmc2.mongodb.net:27017,cluster0-shard-00-01.2vmc2.mongodb.net:27017,cluster0-shard-00-02.2vmc2.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-14mcg8-shard-0&authSource=admin&retryWrites=true&w=majority",
+    intents: ["GUILDS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_INTEGRATIONS", "GUILD_INVITES", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_PRESENCES", "GUILD_VOICE_STATES", "GUILD_WEBHOOKS"]
+})
+client.on("debug", console.log)
+client.on("log", (log)=>{console.log(log)})
 
-client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true, leaveOnEmpty: false });
+client.on("ready", async () => {
+    console.log('The Catie is ready!');
+    client.user.setPresence({
+        activity: {
+            name: ('commands'),
+            type: 2,
+        },
+    })
 
-client.distube
-    .on("playSong", (message, queue, song) => {
-            const playing = new Discord.MessageEmbed
-            playing.setColor('RANDOM')
-            playing.setDescription(`▶ Playing: **${song.name}**`)
-            message.channel.send(playing)
-    })
-    .on("addSong", (message, queue, song) => {
-            const addsong = new Discord.MessageEmbed
-            addsong.setColor('RANDOM')
-            addsong.setDescription(`▶ Added **${song.name}** to the queue`)
-            message.channel.send(addsong)
-    })
-    .on("initQueue", queue => {
-            queue.autoplay = false;
-    })
-    .on("finish", message => {
-        const MemberVoiceChannel = message.member.voice.channel
-        const nosong2 = new Discord.MessageEmbed
-        nosong2.setColor('RANDOM')
-        nosong2.setDescription("No songs in queue. I'm leaving voice channel.")
-        message.channel.send(nosong2)
-        MemberVoiceChannel.leave()
-        })
+
+
+})
+
 
 // DATABASE
 
@@ -92,66 +94,5 @@ const manager = new GiveawayManagerWithOwnDatabase(client, {
 })
 client.giveawaysManager = manager
 
-
-
-client.once('ready', () => {
-    console.log('The Catie is ready!');
-    client.user.setPresence({
-        activity: {
-            name: ('commands'),
-            type: 2,
-        },
-    })
-});
-
-const fs = require('fs');
-const { token } = require('./config.json');
-const { collection } = require('./models/serverSettings')
-client.commands = new Discord.Collection();
-client.cooldowns = new Discord.Collection();
-
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-
-	client.commands.set(command.name, command);
-}
-
-client.on('message', async message => {
-        const serverSettings = require('./models/serverSettings')
-        const serverData = await serverSettings.findOne({ serverID: message.guild.id})
-        const prefix = serverData.prefix
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (!client.commands.has(command)) return;
-
-	try {
-		client.commands.get(command).execute(message, args);
-	} catch (error) {
-		console.error(error);
-	}
-	// other commands...
-        
-});
-
-
-
-
-
-
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-
-for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args, client));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args, client));
-	}
-}
-
 client.login(config.token)
+

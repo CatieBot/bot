@@ -1,18 +1,40 @@
 const Discord = require('discord.js')
+const { Command, ArgumentType } = require('gcommands')
 
-module.exports = {
-	name: 'howlesbian',
-	description: '',
-	execute(message, args) {
-                const author = message.author.tag
-                console.log(`${author} send command howlesbian.`)
-        const member = message.mentions.users.first() || message.author
+module.exports = class Howlesbian extends Command {
+    constructor(...args) {
+        super(...args, {
+            name: 'howlesbian',
+            description: 'Show how many percent you are lesbian',
+            args: [
+                {
+                    name: "user",
+                    type: ArgumentType.USER,
+                    description: "User",
+                    required: false
+                }
+            ]
+        })
+    }
+    async run({client, respond, edit, member, guild}, args) {
+        const me = member
+        const target = args[0].replace(/<@!/g, "").replace(/>/g, "")
+        if (!target) {
+            const rng = Math.floor(Math.random() * 101)
 
-        const rng = Math.floor(Math.random() * 101)
+            const hg = new Discord.MessageEmbed
+            hg.setColor('RANDOM')
+            hg.setDescription(`${me.user.username} is ${rng}% lesbian :rainbow_flag:`)
+            respond({embeds: [hg]})
+        } else {
+            const targetMember = guild.members.cache.get(target)
+            const rng = Math.floor(Math.random() * 101)
 
-        const hg = new Discord.MessageEmbed
-        hg.setColor('RANDOM')
-        hg.setDescription(`${member.username} is ${rng}% lesbian :rainbow_flag:`)
-        message.channel.send(hg)
-	},
-};
+            const hg = new Discord.MessageEmbed
+            hg.setColor('RANDOM')
+            hg.setDescription(`${targetMember.user.username} is ${rng}% lesbian :rainbow_flag:`)
+            respond({embeds: [hg]})
+        }
+    }
+}
+

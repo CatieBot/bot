@@ -1,18 +1,21 @@
 const Discord = require('discord.js')
 const axios = require('axios')
+const { Command, ArgumentType } = require('gcommands')
 
-module.exports = {
-	name: 'fox',
-	description: 'Show random image of fox',
-	execute(message, args) {
-        const author = message.author.tag
-        console.log(`${author} send command fox.`)
+module.exports = class Fox extends Command {
+    constructor(...args) {
+        super(...args, {
+            name: 'fox',
+            description: 'Show random image of fox',
+        })
+    }
+    async run({client, respond, edit}) {
         axios.get('https://randomfox.ca/floof/').then((fox) => {
             const fox_msg = new Discord.MessageEmbed
             fox_msg.setTitle('🦊')
             fox_msg.setColor('RANDOM')
             fox_msg.setImage(fox.data.image)
-            message.channel.send(fox_msg)
+            respond({embeds: [fox_msg]})
         })
-	},
-};
+    }
+}

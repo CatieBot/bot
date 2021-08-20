@@ -1,52 +1,46 @@
 const Discord = require("discord.js")
+const { Command, ArgumentType } = require('gcommands')
+const nouser = new Discord.MessageEmbed()
+nouser.setColor('#C92D1C')
+nouser.setDescription('<:CatieError:839151745665204234> You need mention the member you want to kick.')
+const noreason = new Discord.MessageEmbed()
+noreason.setColor('#C92D1C')
+noreason.setDescription('<:CatieError:839151745665204234> You need define reason.')
 
-module.exports = {
-    name: 'kick',
-    description: 'Kick user',
-    execute(message, args) {
-        if (!message.guild.me.hasPermission('KICK_MEMBERS')) {
-            const botnoperm = new Discord.MessageEmbed
-            botnoperm.setTitle(`<:CatieError:839151745665204234> I don't have permissions!`)
-            botnoperm.setColor('#C92D1C')
-            botnoperm.setDescription('I need permission **Kick Members** to use this command.')
-            message.channel.send(botnoperm)
-        } else {
-            if (message.member.hasPermission('KICK_MEMBERS')) {
-                const author = message.author.tag
-                console.log(`${author} send command kick.`)
-                const target = message.mentions.users.first()
-                const reasonmsg = args.slice(1).join(" ")
-                if (target) {
-                    if (args[1]) {
-                        const targetMember = message.guild.members.cache.get(target.id)
-                        targetMember.kick({reason: `${reasonmsg}`})
-                        const embed3 = new Discord.MessageEmbed()
-                        embed3.setColor('RANDOM')
-                        embed3.setDescription(`<:CatieCheckmark:839151698495930388> ${targetMember} has been kicked for **${reasonmsg}**!`)
-            
-                        message.channel.send(embed3)
-        
-                    } else {
-                    const embed4 = new Discord.MessageEmbed()
-                    embed4.setColor('#c92d1c')
-                    embed4.setDescription('<:CatieError:839151745665204234> You need define reason.')
-                    message.channel.send(embed4)
-                    }
-                } else {
-                    const embed2 = new Discord.MessageEmbed()
-                    embed2.setColor('#c92d1c')
-                    embed2.setDescription('<:CatieError:839151745665204234> You need mention the member you want to ban.')
-                    message.channel.send(embed2)
-                }
-            } else {
-                const embed = new Discord.MessageEmbed();
-                embed.setTitle('<:CatieError:839151745665204234> No permission!')
-                embed.setColor('#c92d1c')
-                embed.setDescription('You need permission **Kick Members** to use this command.')
-        
-                message.channel.send(embed)
+module.exports = class Kick extends Command {
+    constructor(...args) {
+        super(...args, {
+            name: 'kick',
+            description: 'Kick a user',
+            userRequiredPermissions: "KICK_MEMBERS",
+            clientRequiredPermissions: "KICK_MEMBERS",
+            args: [
+                {
+                    name: "user",
+                    type: ArgumentType.USER,
+                    description: "User you wand to kick",
+                    prompt: nouser,
+                    required: true
+                },
+                {
+                    name: "reason",
+                    type: ArgumentType.STRING,
+                    description: "Reason for kick",
+                    prompt: noreason,
+                    required: true
+                },
+            ]
+        })
+    }
+    async run({client, respond, edit, guild}, args) {
+        const target = args[0].replace(/<@!/g, "").replace(/>/g, "")
+        const targetMember = guild.members.cache.get(target)
+        const reasonmsg = args[1]
+        targetMember.kick({reason: `${reasonmsg}`})
+        const embed3 = new Discord.MessageEmbed()
+        embed3.setColor('RANDOM')
+        embed3.setDescription(`<:CatieCheckmark:839151698495930388> ${targetMember} has been kicked for **${reasonmsg}**!`)
+    
+        respond({embeds: [embed3]})
             }
         }
-    
-    },
-};

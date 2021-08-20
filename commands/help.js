@@ -1,78 +1,87 @@
 const Discord = require('discord.js')
-const serverSettings = require('../models/serverSettings')
+const { Command, ArgumentType } = require('gcommands')
 
-module.exports = {
-	name: 'help',
-	description: 'Show all commands.',
-	async execute(message, args) {
-        const serverData = await serverSettings.findOne({serverID: message.guild.id})
-        const prefix = serverData.prefix
-        const author = message.author.tag
-        console.log(`${author} send command help.`)
+module.exports = class Help extends Command {
+    constructor(...args) {
+        super(...args, {
+            name: 'help',
+            description: 'Show all commands',
+            args: [
+                {
+                    name: "module",
+                    type: ArgumentType.STRING,
+                    description: "Module",
+                    required: false
+                }
+            ]
+        })
+    }
+    async run({client, respond, edit}, args) {
         const type = args[0]
-        if (message.guild.id === '813008131285843989') return
         if (!type) {
             const help = new Discord.MessageEmbed
             help.setTitle('Help')
             help.setColor('RANDOM')
-            help.setDescription(`Meow.. here are all the modules:\n\n🔵 **Moderation** - ${prefix}help moderation\n🎈 **Fun** - ${prefix}help fun\n✨ **Levels** - ${prefix}help levels\n🎶 **Music** - ${prefix}help music\n💰 **Economy** - ${prefix}help economy\n🎉 **Giveaways** - ${prefix}help giveaways\n❓ **Info** - ${prefix}help info\n🔨 **Utility** - ${prefix}help utility`)
-            message.channel.send(help)
+            help.setDescription(`Meow.. here are all the modules:\n\n🔵 **Moderation** - /help moderation\n🎈 **Fun** - /help fun\n✨ **Levels** - /help levels\n🎶 **Music** - *This module is temporarily disabled*\n💰 **Economy** - /help economy\n🎉 **Giveaways** - /help giveaways\n❓ **Info** - /help info\n🔨 **Utility** - /help utility`)
+           respond({embeds: [help]})
         }
         if (type === 'moderation') {
             const mod = new Discord.MessageEmbed
             mod.setTitle('🔵 Moderation')
             mod.setColor('RANDOM')
-            mod.setDescription(`**${prefix}clear** - Clear the chat\n**${prefix}ban** - Ban the user\n**${prefix}kick** - Kick the user\n**${prefix}slow** - Set slowmode\n**${prefix}poll** - Send a poll`)
-            message.channel.send(mod)
+            mod.setDescription(`**/clear** - Clear the chat\n**/ban** - Ban the user\n**/kick** - Kick the user\n**/slow** - Set slowmode\n**/poll** - Send a poll`)
+            respond({embeds: [mod]})
         }
         if (type === 'fun') {
             const fun = new Discord.MessageEmbed
             fun.setTitle('🎈 Fun')
             fun.setColor('RANDOM')
-            fun.setDescription(`**${prefix}8ball** - Ask me a question\n**${prefix}meme** - Send the meme from reddit\n**${prefix}howgay** - Show how many % you are gay\n**${prefix}saytome** - Something say to me\n**${prefix}cat** - Show random cat\n**${prefix}dog** - Show random dog\n**${prefix}fox** - Show random fox\n**${prefix}howlesbian** - Show how many % you are lesbian`)
-            message.channel.send(fun)
+            fun.setDescription(`**/8ball** - Ask me a question\n**/meme** - Send the meme from reddit\n**/howgay** - Show how many % you are gay\n**/saytome** - Something say to me\n**/cat** - Show random cat\n**/dog** - Show random dog\n**/fox** - Show random fox\n**/howlesbian** - Show how many % you are lesbian`)
+            respond({embeds: [fun]})
         }
         if (type === 'levels') {
             const levels = new Discord.MessageEmbed
             levels.setTitle('✨ Levels')
             levels.setColor('RANDOM')
-            levels.setDescription(`**${prefix}rank** - Show your level.\n**${prefix}resetxp** - Reset all xp and levels\n**${prefix}addxp** - Add xp to user\n**${prefix}setreward** - Set role reward for specific level\n**${prefix}delreward** - Delete role reward for specific level\n**${prefix}rewardlist** - Show all role rewards`)
-            message.channel.send(levels)
+            levels.setDescription(`**/rank** - Show your level.\n**/xp** - Manage xp's and levels\n**/rewards** - Manage level rewards`)
+            respond({embeds: [levels]})
         }
         if (type === 'music') {
             const music = new Discord.MessageEmbed
             music.setTitle('🎶 Music')
             music.setColor('RANDOM')
-            music.setDescription(`**${prefix}play** - Play a song\n**${prefix}stop** - Stop the music\n**${prefix}queue** - Show queue\n**${prefix}skip** - Skip the song\n**${prefix}loop** - Loop song/queue\n**${prefix}volume** - Set volume\n**${prefix}pause** - Pause the song\n**${prefix}resume** - Resume the song\n**${prefix}radio** - Play a radio!`)
-            message.channel.send(music)
+            music.setDescription(`This module is temporarily disabled.`)
+            respond({embeds: [music]})
         }
         if (type === 'economy') {
             const economy = new Discord.MessageEmbed
             economy.setTitle('💰 Economy')
             economy.setColor('RANDOM')
-            economy.setDescription(`**${prefix}balance** - Show your balance\n**${prefix}beg** - Beg and earn coins\n**${prefix}deposit** - Deposit coins into your bank\n**${prefix}withdraw** - Withdraw coins from bank into your wallet\n**${prefix}coinflip** - Flip a coin!`)
-            message.channel.send(economy)
+            economy.setDescription(`**/balance** - Show your balance\n**/beg** - Beg and earn coins\n**/deposit** - Deposit coins into your bank\n**/withdraw** - Withdraw coins from bank into your wallet\n**/coinflip** - Flip a coin!`)
+            respond({embeds: [economy]})
         }
         if (type === 'giveaways') {
             const giveaways = new Discord.MessageEmbed
             giveaways.setTitle('🎉 Giveaways')
             giveaways.setColor('RANDOM')
-            giveaways.setDescription(`**${prefix}gcreate** - Create a giveaway\n**${prefix}gedit** - Edit a giveaway\n**${prefix}greroll** - Reroll a giveaway\n**${prefix}gend** - End and delete a giveaway`)
-            message.channel.send(giveaways)
+            giveaways.setDescription(`**/giveaway** - Manage giveaways`)
+            mrespond({embeds: [giveaways]})
         }
         if (type === 'info') {
             const info = new Discord.MessageEmbed
             info.setTitle('❓ Info')
             info.setColor('RANDOM')
-            info.setDescription(`**${prefix}ping** - Show bot ping\n**${prefix}userinfo** - Show info about user\n **${prefix}serverinfo** - Show info about server`)
-            message.channel.send(info)
+            info.setDescription(`**/ping** - Show bot ping\n**/userinfo** - Show info about user\n **/serverinfo** - Show info about server`)
+            respond({embeds: [info]})
         }
         if (type === 'utility') {
             const utility = new Discord.MessageEmbed
             utility.setTitle('🔨 Utility')
             utility.setColor('RANDOM')
-            utility.setDescription(`**${prefix}levels** - Turn on or turn off level system\n**${prefix}setprefix** - Set custom prefix\n**${prefix}invite** - Send invite link and other links`)
-            message.channel.send(utility)
+            utility.setDescription(`**/levels** - Turn on or turn off level system\n**/invite** - Send invite link and other links`)
+            respond({embeds: [utility]})
         }
-	},
-};
+    }
+}
+
+        

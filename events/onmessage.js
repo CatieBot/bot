@@ -5,11 +5,19 @@ const serverSettings = require('../models/serverSettings')
 const userBadges = require('../models/badges')
 const levelRewards = require('../models/levelRewards')
 Levels.setURL("mongodb+srv://daneeskripter:danee08@cluster0.2vmc2.mongodb.net/Data")
+const { Event } = require("gcommands")
 
-module.exports = {
-	name: 'message',
-	async execute(message, client) {
-        let settingsData = await serverSettings.findOne({serverID: message.guild.id})
+module.exports = class OnMessage extends Event {
+  constructor(...args) {
+      super(...args, {
+          name: "message",
+          once: false,
+          ws: false
+      })
+  }
+
+  async run(client, message) {
+    let settingsData = await serverSettings.findOne({serverID: message.guild.id})
             // SERVER INFO
             if (!settingsData) {
                 const settings = new serverSettings({
@@ -24,7 +32,7 @@ module.exports = {
             if (message.content === '<@827871131540652062>') {
                     const infomsg = new Discord.MessageEmbed
                     infomsg.setColor('RANDOM')
-                    infomsg.setDescription(`My prefix here is: **${settingsData.prefix}**`)
+                    infomsg.setDescription(`My prefix here is: **/ or c!**`)
                     infomsg.setFooter('btw i like pancakes <3')
                     message.channel.send(infomsg)
                 }
@@ -575,6 +583,6 @@ module.exports = {
           if (!role) return;
           message.member.roles.add(role)
         }
+}
         
-    },
-};
+}
