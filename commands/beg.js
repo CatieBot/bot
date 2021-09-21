@@ -10,7 +10,7 @@ module.exports = class Beg extends Command {
             description: 'Beg for coins',
         })
     }
-    async run({client, respond, edit, member}, args) {
+    async run({client, respond, edit, args, member}) {
         const rn = Math.floor(Math.random() * 500) + 1
         const response = await economyProfile.findOneAndUpdate({
              userID: member.id,

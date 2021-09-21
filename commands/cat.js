@@ -9,7 +9,7 @@ module.exports = class Cat extends Command {
             description: 'Show random image of cat',
         })
     }
-    async run({client, respond, edit}, args) {
+    async run({client, respond, edit, args}) {
     axios.get('https://api.thecatapi.com/v1/images/search').then((cat) => {
     const cat_msg = new Discord.MessageEmbed
     cat_msg.setTitle('<:Catie:839492019452641290> Meow!')

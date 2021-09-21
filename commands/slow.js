@@ -23,7 +23,7 @@ module.exports = class Slow extends Command {
         })
     }
 
-    async run({client, respond, edit, channel}, args) {
+    async run({client, respond, edit, args, channel}) {
     const time = args[0]
     if (time) {
         if (time === 0) {

@@ -51,7 +51,7 @@ module.exports = class Xp extends Command {
             ]
         })
     }
-    async run({client, respond, edit}, args) {
+    async run({client, respond, edit, args}) {
         const subcmd = args[0]
         if (subcmd === 'add') {
             const target = args[1]

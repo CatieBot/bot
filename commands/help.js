@@ -16,13 +16,13 @@ module.exports = class Help extends Command {
             ]
         })
     }
-    async run({client, respond, edit}, args) {
+    async run({client, respond, edit, args}) {
         const type = args[0]
         if (!type) {
             const help = new Discord.MessageEmbed
             help.setTitle('Help')
             help.setColor('RANDOM')
-            help.setDescription(`Meow.. here are all the modules:\n\n🔵 **Moderation** - /help moderation\n🎈 **Fun** - /help fun\n✨ **Levels** - /help levels\n🎶 **Music** - *This module is temporarily disabled*\n💰 **Economy** - /help economy\n🎉 **Giveaways** - /help giveaways\n❓ **Info** - /help info\n🔨 **Utility** - /help utility`)
+            help.setDescription(`Meow.. here are all the modules:\n\n🔵 **Moderation** - /help moderation\n🎈 **Fun** - /help fun\n✨ **Levels** - /help levels\n🎶 **Music** - /help music\n💰 **Economy** - /help economy\n🎉 **Giveaways** - /help giveaways\n❓ **Info** - /help info\n🔨 **Utility** - /help utility`)
            respond({embeds: [help]})
         }
         if (type === 'moderation') {
@@ -50,7 +50,7 @@ module.exports = class Help extends Command {
             const music = new Discord.MessageEmbed
             music.setTitle('🎶 Music')
             music.setColor('RANDOM')
-            music.setDescription(`This module is temporarily disabled.`)
+            music.setDescription(`**/music** - Play some music.`)
             respond({embeds: [music]})
         }
         if (type === 'economy') {

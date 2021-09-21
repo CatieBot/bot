@@ -20,7 +20,7 @@ module.exports = class ball extends Command {
         })
     }
 
-    async run({client, respond, edit}, args) {
+    async run({client, respond, edit, args}) {
         const replies = [`Yes`, "No", "Hmmm... Yes!", "Hmmm... No!", "I don't know.", "Maybe", "Never"]
         const result = replies[Math.floor(Math.random()*replies.length)]
         const answer = new Discord.MessageEmbed

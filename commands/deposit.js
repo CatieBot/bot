@@ -21,7 +21,7 @@ module.exports = class Deposit extends Command {
             ]
         })
     }
-    async run({client, respond, edit, member}, args) {
+    async run({client, respond, edit, args, member}) {
         const economyData = await economyProfile.findOne({ userID: member.id})
         const amount = args[0]
         if (amount % 1 != 0 || amount <= 0) {

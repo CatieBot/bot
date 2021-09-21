@@ -24,7 +24,7 @@ module.exports = class Clear extends Command {
         })
     }
     
-    async run({client, respond, edit, channel}, args) {
+    async run({client, respond, edit, args, channel}) {
         const number = args[0]
         channel.bulkDelete(number)
         const embed = new Discord.MessageEmbed();

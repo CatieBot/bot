@@ -50,7 +50,7 @@ module.exports = class Rewards extends Command {
         })
     }
 
-    async run({client, respond, edit, guild}, args) {
+    async run({client, respond, edit, args, guild}) {
         const subcmd = args[0]
         if (subcmd === 'set') {
             const level = args[1]

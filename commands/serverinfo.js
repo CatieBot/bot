@@ -8,7 +8,7 @@ module.exports = class Serverinfo extends Command {
             description: 'Show info about server',
         })
     }
-    async run({client, respond, edit, guild}, args) {
+    async run({client, respond, edit, args, guild}) {
         console.log(guild.owner)
                 // INFO
                 const serverName = guild.name

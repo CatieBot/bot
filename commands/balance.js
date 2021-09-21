@@ -18,7 +18,7 @@ module.exports = class Balance extends Command {
             ]
         })
     }
-    async run({client, respond, edit, member}, args) {
+    async run({client, respond, edit, args, member}) {
         const user = member
         const target = args[0]
         if (!target) {

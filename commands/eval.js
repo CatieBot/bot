@@ -18,7 +18,7 @@ module.exports = class Eval extends Command {
             ]
         })
     }
-    async run({client, respond, edit, member}, args) {
+    async run({client, respond, edit, args, member}) {
         if (member.id === ownerID) {
             const result = eval(args[0])
         } else {

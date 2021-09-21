@@ -21,7 +21,7 @@ module.exports = class Saytome extends Command {
             ]
         })
     }
-    async run({client, respond, edit}, args) {
+    async run({client, respond, edit, args}) {
         const something = args[0]
         const answers = ["Oh, thank you", "I'm sad, why did you tell me that?", "Hmm...", "Yay!", "Meow!", "That's amazing!", "Ok.", "Super!"]
         const answer = answers[Math.floor(Math.random()*answers.length)]

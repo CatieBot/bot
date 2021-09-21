@@ -11,7 +11,7 @@ module.exports = class _ extends Command {
             description: 'Show bot stats & info',
         })
     }
-    async run({client, respond, edit, guild}, args) {
+    async run({client, respond, edit, args, guild}) {
         let settingsData = await serverSettings.findOne({serverID: guild.id})
         const msg = new Discord.MessageEmbed
         msg.setTitle('<:Catie:839492019452641290> Catie Stats')

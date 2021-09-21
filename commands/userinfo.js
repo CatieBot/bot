@@ -17,7 +17,7 @@ module.exports = class Userinfo extends Command {
             ]
         })
     }
-    async run({client, respond, edit, member, guild}, args) {
+    async run({client, respond, edit, args, guild, member}) {
         if (args[0]) {
             const userid = args[0].replace(/<@!/g, "").replace(/>/g, "")
             const user = guild.members.cache.get(userid)

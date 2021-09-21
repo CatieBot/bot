@@ -8,7 +8,7 @@ module.exports = class Ticket extends Command {
             description: 'Create a ticket'
         })
     }
-    async run({client, respond, edit, guild, member}, args) {
+    async run({client, respond, edit, args, guild, member}) {
         const randomNumber = Math.floor(Math.random()*10000)
         const channel = await guild.channels.create(`ticket-${randomNumber}`)
         channel.permissionOverwrites.create(guild.roles.everyone, {

@@ -94,7 +94,7 @@ module.exports = class Giveaway extends Command {
         })
     }
 
-    async run({client, respond, edit, member, channel}, args) {
+    async run({client, respond, edit, args, member, channel}) {
         const subcmd = args[0]
         if (!subcmd) {
             const nosubcmd = new Discord.MessageEmbed

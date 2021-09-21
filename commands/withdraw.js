@@ -18,7 +18,7 @@ module.exports = class Withdraw extends Command {
             ]
         })
     }
-    async run({client, respond, edit}, args) {
+    async run({client, respond, edit, args, member}) {
         const user = member
         const economyData = await economyProfile.findOne({ userID: user.id})
         const amount = args[0]

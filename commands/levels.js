@@ -22,7 +22,7 @@ module.exports = class Levels extends Command {
             ]
         })
     }
-    async run({client, respond, edit, guild}, args) {
+    async run({client, respond, edit, args, guild}) {
         const onoff = args[0]
         if (onoff === 'on') {
             const response = await serverSettings.findOneAndUpdate({

@@ -16,7 +16,7 @@ module.exports = class Howlesbian extends Command {
             ]
         })
     }
-    async run({client, respond, edit, member, guild}, args) {
+    async run({client, respond, edit, args, member, guild}) {
         const me = member
         const target = args[0].replace(/<@!/g, "").replace(/>/g, "")
         if (!target) {

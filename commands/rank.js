@@ -21,7 +21,7 @@ module.exports = class Rank extends Command {
             ]
         })
     }
-    async run({client, respond, edit, member, guild}, args) {
+    async run({client, respond, edit, args, member, guild}) {
         const serverData = await serverSettings.findOne({serverID: guild.id})
         if (serverData.levels === 'off') {
             const disabled = new Discord.MessageEmbed

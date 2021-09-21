@@ -32,7 +32,7 @@ module.exports = class Kick extends Command {
             ]
         })
     }
-    async run({client, respond, edit, guild}, args) {
+    async run({client, respond, edit, args, guild}) {
         const target = args[0].replace(/<@!/g, "").replace(/>/g, "")
         const targetMember = guild.members.cache.get(target)
         const reasonmsg = args[1]

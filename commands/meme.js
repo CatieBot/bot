@@ -9,7 +9,7 @@ module.exports = class Meme extends Command {
             description: 'Show random meme from reddit',
         })
     }
-    async run({client, respond, edit}, args) {
+    async run({client, respond, edit, args}) {
         const subreddits = ["meme", "memes", "dankmeme"]
         const random = subreddits[Math.floor(Math.random() * subreddits.length)]
 

@@ -9,7 +9,7 @@ module.exports = class Fox extends Command {
             description: 'Show random image of fox',
         })
     }
-    async run({client, respond, edit}) {
+    async run({client, respond, edit, args}) {
         axios.get('https://randomfox.ca/floof/').then((fox) => {
             const fox_msg = new Discord.MessageEmbed
             fox_msg.setTitle('🦊')

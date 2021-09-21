@@ -8,7 +8,7 @@ module.exports = class Ping extends Command {
             description: 'Show bot ping',
         })
     }
-    async run({client, respond, edit}, args) {
+    async run({client, respond, edit, args}) {
         const pingmsg = new Discord.MessageEmbed
         pingmsg.setTitle('🏓 Pong!')
         pingmsg.setColor('RANDOM')

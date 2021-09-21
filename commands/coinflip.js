@@ -21,7 +21,7 @@ module.exports = class Coinflip extends Command {
             ]
         })
     }
-    async run({client, respond, edit, member}, args) {
+    async run({client, respond, edit, args, member}) {
         const amount = args[0]
         const economyData = await economyProfile.findOne({ userID: member.id})
             if (amount > economyData.coins) {

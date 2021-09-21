@@ -9,7 +9,7 @@ module.exports = class Dog extends Command {
             description: 'Show random image of dog',
         })
     }
-    async run({client, respond, edit}) {
+    async run({client, respond, edit, args}) {
         axios.get('https://dog.ceo/api/breeds/image/random').then((dog) => {
             const dog_msg = new Discord.MessageEmbed
             dog_msg.setTitle('🐶')
