@@ -6,6 +6,7 @@ module.exports = class Serverinfo extends Command {
         super(...args, {
             name: 'serverinfo',
             description: 'Show info about server',
+            
         })
     }
     async run({client, respond, edit, args, guild}) {

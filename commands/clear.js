@@ -12,6 +12,7 @@ module.exports = class Clear extends Command {
             description: 'Clear the chat',
             userRequiredPermissions: "MANAGE_MESSAGES",
             clientRequiredPermissions: "MANAGE_MESSAGES",
+            
             args: [
                 {
                     name: "msg-to-del",

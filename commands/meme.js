@@ -7,6 +7,7 @@ module.exports = class Meme extends Command {
         super(...args, {
             name: 'meme',
             description: 'Show random meme from reddit',
+            guildOnly: "843109505876230144",
         })
     }
     async run({client, respond, edit, args}) {

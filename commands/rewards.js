@@ -7,6 +7,7 @@ module.exports = class Rewards extends Command {
         super(...args, {
             name: 'rewards',
             description: 'Manage level rewards',
+            
 
             args: [
                 {

@@ -7,7 +7,7 @@ module.exports = class ball extends Command {
         super(...args, {
             name: '8ball',
             description: 'Ask a question',
-            guildOnly: "843109505876230144",
+            
             args: [
                 {
                     name: "question",

@@ -9,6 +9,7 @@ module.exports = class _ extends Command {
         super(...args, {
             name: 'botstats',
             description: 'Show bot stats & info',
+            
         })
     }
     async run({client, respond, edit, args, guild}) {

@@ -5,7 +5,8 @@ module.exports = class Ticket extends Command {
     constructor(...args) {
         super(...args, {
             name: 'ticket',
-            description: 'Create a ticket'
+            description: 'Create a ticket',
+            
         })
     }
     async run({client, respond, edit, args, guild, member}) {

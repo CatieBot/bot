@@ -7,6 +7,7 @@ module.exports = class Withdraw extends Command {
         super(...args, {
             name: 'withdraw',
             description: 'Withdraw coins from bank into your wallet',
+            
             args: [
                 {
                     name: "amount",

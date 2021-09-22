@@ -8,6 +8,7 @@ module.exports = class Balance extends Command {
         super(...args, {
             name: 'balance',
             description: 'Show balance of user',
+            
             args: [
                 {
                     name: "user",

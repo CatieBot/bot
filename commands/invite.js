@@ -6,6 +6,7 @@
           super(...args, {
               name: 'invite',
               description: 'Show all links',
+              
           })
       }
       async run({client, respond, edit, args}) {

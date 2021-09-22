@@ -10,6 +10,7 @@ module.exports = class Deposit extends Command {
         super(...args, {
             name: 'deposit',
             description: 'Deposit money to bank',
+            
             args: [
                 {
                     name: "amount",

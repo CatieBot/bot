@@ -7,6 +7,7 @@ module.exports = class Eval extends Command {
         super(...args, {
             name: 'eval',
             description: 'Eval',
+            
             args: [
                 {
                     name: "code",

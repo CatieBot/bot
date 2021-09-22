@@ -9,6 +9,7 @@ module.exports = class Xp extends Command {
             name: 'xp',
             description: 'Manage xp and levels',
             userRequiredPermissions: "MANAGE_MESSAGES",
+            
             args: [
                 {
                     name: "add",

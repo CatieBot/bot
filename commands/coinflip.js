@@ -10,6 +10,7 @@ module.exports = class Coinflip extends Command {
         super(...args, {
             name: 'coinflip',
             description: 'Flip a coin',
+            
             args: [
                 {
                     name: "amount",

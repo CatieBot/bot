@@ -8,6 +8,7 @@ module.exports = class Beg extends Command {
         super(...args, {
             name: 'beg',
             description: 'Beg for coins',
+            
         })
     }
     async run({client, respond, edit, args, member}) {

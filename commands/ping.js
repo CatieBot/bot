@@ -6,6 +6,7 @@ module.exports = class Ping extends Command {
         super(...args, {
             name: 'ping',
             description: 'Show bot ping',
+            
         })
     }
     async run({client, respond, edit, args}) {

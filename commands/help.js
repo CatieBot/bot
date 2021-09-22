@@ -6,6 +6,7 @@ module.exports = class Help extends Command {
         super(...args, {
             name: 'help',
             description: 'Show all commands',
+            
             args: [
                 {
                     name: "module",

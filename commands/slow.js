@@ -11,6 +11,7 @@ module.exports = class Slow extends Command {
             description: 'Slow a chat',
             userRequiredPermissions: "MANAGE_MESSAGES",
             clientRequiredPermissions: "MANAGE_MESSAGES",
+            
             args: [
                 {
                     name: "time",

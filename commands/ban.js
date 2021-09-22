@@ -16,6 +16,7 @@ module.exports = class Ban extends Command {
             description: 'Ban a user',
             userRequiredPermissions: "BAN_MEMBERS",
             clientRequiredPermissions: "BAN_MEMBERS",
+            
             args: [
                 {
                     name: "user",

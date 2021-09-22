@@ -11,6 +11,7 @@ module.exports = class Rank extends Command {
         super(...args, {
             name: 'rank',
             description: 'Show your level and rank',
+            
             args: [
                 {
                     name: "user",

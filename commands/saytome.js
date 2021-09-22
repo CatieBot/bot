@@ -9,7 +9,7 @@ module.exports = class Saytome extends Command {
         super(...args, {
             name: 'saytome',
             description: 'Say something to me',
-
+            
             args: [
                 {
                     name: "something",

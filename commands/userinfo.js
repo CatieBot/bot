@@ -7,6 +7,7 @@ module.exports = class Userinfo extends Command {
         super(...args, {
             name: 'userinfo',
             description: 'Show info about user',
+            
             args: [
                 {
                     name: "user",

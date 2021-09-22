@@ -6,6 +6,7 @@ module.exports = class Howgay extends Command {
         super(...args, {
             name: 'howgay',
             description: 'Show how many percent you are gay',
+            
             args: [
                 {
                     name: "user",
@@ -16,9 +17,9 @@ module.exports = class Howgay extends Command {
             ]
         })
     }
-    async run({client, respond, edit, args, guild, member}) {
+    async run({client, respond, edit, guild, member, args}) {
         const me = member
-        const target = args[0].replace(/<@!/g, "").replace(/>/g, "")
+        const target = args[0]
         if (!target) {
             const rng = Math.floor(Math.random() * 101)
 

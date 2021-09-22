@@ -7,6 +7,7 @@ module.exports = class Dog extends Command {
         super(...args, {
             name: 'dog',
             description: 'Show random image of dog',
+            
         })
     }
     async run({client, respond, edit, args}) {

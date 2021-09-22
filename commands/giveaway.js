@@ -8,6 +8,7 @@ module.exports = class Giveaway extends Command {
             name: 'giveaway',
             description: 'Manage giveaways',
             userRequiredPermissions: "MANAGE_MESSAGES",
+            
             args: [
                 {
                     name: "start",

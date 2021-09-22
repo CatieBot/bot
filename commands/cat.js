@@ -7,6 +7,7 @@ module.exports = class Cat extends Command {
         super(...args, {
             name: 'cat',
             description: 'Show random image of cat',
+            
         })
     }
     async run({client, respond, edit, args}) {

@@ -11,6 +11,7 @@ module.exports = class Levels extends Command {
             name: 'levels',
             description: 'Manage level system',
             userRequiredPermissions: 'MANAGE_MESSAGES',
+            guildOnly: "843109505876230144",
             args: [
                 {
                     name: "on-off",

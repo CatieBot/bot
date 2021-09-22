@@ -1,6 +1,5 @@
 const { GCommandsClient, GCommands, Color } = require("gcommands")
 const config = require('./config.json')
-const DisTube = require('distube')
 const mongoose = require('mongoose')
 const { join } = require('path');
 
@@ -54,49 +53,17 @@ mongoose.connect(config.mongodb_srv, {
 
 
 // GIVEAWAYS
-const { Database } = require('quickmongo');
-const db = new Database(config.mongodb_srv);
-db.once('ready', async () => {
-    if ((await db.get('giveaways')) === null) await db.set('giveaways', []);
-});
-
-const { GiveawaysManager } = require('discord-giveaways');
-class GiveawayManagerWithOwnDatabase extends GiveawaysManager {
-    async getAllGiveaways() {
-        return await db.get('giveaways');
-    }
-
-    async saveGiveaway(messageID, giveawayData) {
-        await db.push('giveaways', giveawayData);
-        return true;
-    }
-
-    async editGiveaway(messageID, giveawayData) {
-        const giveaways = await db.get('giveaways');
-        const newGiveawaysArray = giveaways.filter((giveaway) => giveaway.messageID !== messageID);
-        newGiveawaysArray.push(giveawayData);
-        await db.set('giveaways', newGiveawaysArray);
-        return true;
-    }
-
-    async deleteGiveaway(messageID) {
-        const data = await db.get('giveaways');
-        const newGiveawaysArray = data.filter((giveaway) => giveaway.messageID !== messageID);
-        await db.set('giveaways', newGiveawaysArray);
-        return true;
-    }
-}
-
-const manager = new GiveawayManagerWithOwnDatabase(client, {
-    storage: false, 
-    updateCountdownEvery: 2000,
+const { GiveawaysManager } = require('discord-giveaways')
+const manager = new GiveawaysManager(client, {
+    storage: './giveaways.json',
     default: {
         botsCanWin: false,
-        exemptPermissions: [ 'MANAGE_MESSAGES', 'ADMINISTRATOR' ],
-        embedColor: 'RANDOM',
+        embedColor: '#FF0000',
+        embedColorEnd: '#000000',
         reaction: '🎉'
     }
-})
+});
+
 client.giveawaysManager = manager
 
 client.login(config.token)

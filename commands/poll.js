@@ -9,6 +9,7 @@ module.exports = class Poll extends Command {
         super(...args, {
             name: 'poll',
             description: 'Create a poll',
+            
             args: [
                 {
                     name: "question",
@@ -20,7 +21,7 @@ module.exports = class Poll extends Command {
             ]
         })
     }
-    async run({client, respond, edit, args}) {
+    async run({client, respond, edit, member, channel, args}) {
         const question = args[0]
         const user = member
         if (question.includes('pancake')) {

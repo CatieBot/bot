@@ -6,6 +6,7 @@ module.exports = class Howlesbian extends Command {
         super(...args, {
             name: 'howlesbian',
             description: 'Show how many percent you are lesbian',
+            
             args: [
                 {
                     name: "user",
@@ -18,7 +19,7 @@ module.exports = class Howlesbian extends Command {
     }
     async run({client, respond, edit, args, member, guild}) {
         const me = member
-        const target = args[0].replace(/<@!/g, "").replace(/>/g, "")
+        const target = args[0]
         if (!target) {
             const rng = Math.floor(Math.random() * 101)
 
